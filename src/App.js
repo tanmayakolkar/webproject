@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Navbar from "./root/components/navbar/Navbar";
+import Home from "./root/components/home/Home";
+import ProductList from "./products/list/ProductList";
+import ProductAdmin from "./products/admin/ProductAdmin";
+import CreateProduct from "./products/create/CreateProduct";
+import UpdateProduct from "./products/update/UpdateProduct";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <React.Fragment>
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/products/list" component={ProductList} />
+            <Route exact path="/products/admin" component={ProductAdmin} />
+            <Route exact path="/products/create" component={CreateProduct} />
+            <Route
+              exact
+              path="/products/:product_id"
+              component={UpdateProduct}
+            />
+          </Switch>
+        </Router>
+      </React.Fragment>
+    );
+  }
 }
-
 export default App;
